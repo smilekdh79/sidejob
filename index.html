@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MFNCP45V');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7WF9EV3RLW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7WF9EV3RLW');
+  </script>
+  <!-- End Google Analytics 4 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>sidejob | 퇴근 후, 아이디어를 창업으로</title>
@@ -339,15 +355,116 @@
       50% { transform: translateY(-6px); }
     }
 
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--card);
+      border: 1px solid rgba(124,92,252,0.35);
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 480px; width: 90%;
+      position: relative;
+      box-shadow: 0 0 80px rgba(124,92,252,0.2);
+      transform: translateY(24px);
+      transition: transform 0.35s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 20px; right: 24px;
+      background: none; border: none; color: var(--muted);
+      font-size: 24px; cursor: pointer; line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-tag { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 12px; }
+    .modal h3 { font-size: 26px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+    .contact-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 20px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-item:hover { border-color: rgba(124,92,252,0.4); background: rgba(124,92,252,0.06); }
+    .contact-item a { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 16px; width: 100%; }
+    .contact-emoji { font-size: 22px; width: 36px; text-align: center; }
+    .contact-info-label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .contact-info-value { font-size: 15px; font-weight: 700; color: var(--text); }
+    .modal-addr {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 20px;
+    }
+    .modal-addr .contact-info-value { font-size: 14px; font-weight: 600; line-height: 1.6; }
+    .modal-note { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.6; }
+
+    /* FORM */
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.3px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px;
+      color: var(--text); font-family: inherit; font-size: 14px;
+      transition: border-color 0.2s;
+      outline: none; width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent2); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group select option { background: var(--bg3); }
+    .form-submit {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--accent), #5b3fdc);
+      color: #fff; border: none; border-radius: 50px;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 24px rgba(124,92,252,0.35);
+      margin-top: 4px;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(124,92,252,0.55); }
+    .form-submit:disabled { opacity: 0.6; transform: none; cursor: not-allowed; }
+    .form-success {
+      display: none; text-align: center; padding: 32px 0;
+    }
+    .form-success .success-icon { font-size: 48px; margin-bottom: 16px; }
+    .form-success h4 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .form-success p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .quick-contact { display: flex; gap: 10px; margin-top: 16px; justify-content: center; }
+    .quick-contact a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 14px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .quick-contact a:hover { color: var(--text); border-color: var(--accent2); }
+
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
       .stats-bar { gap: 40px; padding: 32px 20px; }
       .process-steps::before { display: none; }
+      .modal { padding: 36px 24px; }
     }
   </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFNCP45V"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- Custom cursor -->
 <div id="cursor"></div>
@@ -451,10 +568,10 @@
         <span class="tag tag-blue">Maintenance</span>
       </div>
       <div class="service-card reveal">
-        <div class="service-icon">💡</div>
-        <h3>기술 컨설팅</h3>
-        <p>어떤 기술 스택을 선택해야 할지, 비용은 얼마나 들지, 개발 기간은 얼마나 필요한지 전문가의 답변을 드립니다.</p>
-        <span class="tag tag-green">Consulting</span>
+        <div class="service-icon">🤖</div>
+        <h3>AI · AX 컨설팅</h3>
+        <p>AI 기능 도입부터 업무 자동화(AX)까지, 우리 서비스에 맞는 AI 전략과 기술 스택을 전문가가 함께 설계해드립니다.</p>
+        <span class="tag tag-green">AI · AX</span>
       </div>
     </div>
   </div>
@@ -589,20 +706,10 @@
         </ul>
       </div>
       <div class="footer-links">
-        <h4>회사</h4>
+        <h4>주소 / 연락처</h4>
         <ul>
-          <li><a href="#">팀 소개</a></li>
-          <li><a href="#">포트폴리오</a></li>
-          <li><a href="#">블로그</a></li>
-          <li><a href="#">채용</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>문의</h4>
-        <ul>
-          <li><a href="#">hello@sidejob.kr</a></li>
-          <li><a href="#">카카오톡 채널</a></li>
-          <li><a href="#">오픈 채팅</a></li>
+          <li style="color: var(--muted); font-size: 13px; line-height: 1.7;">경기도 수원시 영통구<br />신원로 250번길 53, 1238호</li>
+          <li><a href="tel:01021345967">010-2134-5967</a></li>
         </ul>
       </div>
     </div>
@@ -614,7 +721,71 @@
 </footer>
 
 <!-- Floating CTA -->
-<div class="floating-badge" onclick="scrollToSection('cta')">무료 상담 →</div>
+<div class="floating-badge" onclick="openModal()">무료 상담 →</div>
+
+<!-- 상담 모달 -->
+<div class="modal-overlay" id="consultModal" onclick="closeModalOnOverlay(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="닫기">✕</button>
+    <div class="modal-tag">Free Consultation</div>
+    <h3 id="modalTitle">무료 상담 신청하기</h3>
+    <p class="modal-sub">아이디어 단계라도 괜찮습니다.<br />작성해주시면 빠르게 연락드릴게요.</p>
+
+    <!-- 폼 -->
+    <form id="contactForm" action="https://formspree.io/f/mnjlwydk" method="POST">
+      <input type="hidden" name="_subject" value="[sidejob 사이트] 무료 상담 문의" />
+      <input type="hidden" name="_source" value="sidejob.kr 랜딩페이지" />
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">이름 *</label>
+          <input type="text" id="f-name" name="이름" placeholder="홍길동" required />
+        </div>
+        <div class="form-group">
+          <label for="f-phone">연락처 *</label>
+          <input type="tel" id="f-phone" name="연락처" placeholder="010-0000-0000" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="f-email">이메일</label>
+        <input type="email" id="f-email" name="이메일" placeholder="example@email.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="f-type">문의 유형</label>
+        <select id="f-type" name="문의유형">
+          <option value="MVP 개발">🚀 MVP 빠른 출시</option>
+          <option value="아이디어 검증">🔍 아이디어 검증</option>
+          <option value="TIPS 프로그램">🏆 TIPS 프로그램 지원</option>
+          <option value="앱·웹 개발">📱 앱·웹 풀스택 개발</option>
+          <option value="유지보수">🔧 유지보수·운영</option>
+          <option value="기타">💬 기타 문의</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="f-message">아이디어 / 문의 내용</label>
+        <textarea id="f-message" name="내용" placeholder="어떤 서비스를 만들고 싶으신지, 현재 상황을 편하게 적어주세요."></textarea>
+      </div>
+
+      <button type="submit" class="form-submit" id="submitBtn">📨 무료 상담 신청하기</button>
+    </form>
+
+    <!-- 제출 성공 화면 -->
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">🎉</div>
+      <h4>접수 완료!</h4>
+      <p>문의해주셔서 감사합니다.<br />평일 기준 24시간 내에 연락드릴게요.</p>
+      <div class="quick-contact">
+        <a href="tel:01021345967">📞 010-2134-5967</a>
+        <a href="mailto:hello@sidejob.kr">✉️ 이메일</a>
+      </div>
+    </div>
+
+    <p class="modal-note" style="margin-top: 16px;">평일 09:00 – 18:00 운영 · 주말 이메일 답변 가능</p>
+  </div>
+</div>
 
 <script>
   // Custom Cursor
@@ -690,6 +861,61 @@
   function scrollToSection(id) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   }
+
+  // Modal
+  function openModal() {
+    document.getElementById('consultModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // 폼 초기화
+    document.getElementById('contactForm').style.display = '';
+    document.getElementById('formSuccess').style.display = 'none';
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').textContent = '📨 무료 상담 신청하기';
+  }
+  function closeModal() {
+    document.getElementById('consultModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOnOverlay(e) {
+    if (e.target === document.getElementById('consultModal')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Formspree AJAX 제출
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
+    try {
+      const res = await fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = '📨 무료 상담 신청하기';
+        alert('전송 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.');
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = '📨 무료 상담 신청하기';
+      alert('네트워크 오류가 발생했어요. 전화나 이메일로 연락해주세요.');
+    }
+  });
+
+  // Wire up all CTA buttons to open modal
+  document.getElementById('hero-cta1').onclick = openModal;
+  document.getElementById('hero-cta2').onclick = openModal;
+  document.getElementById('cta-free').onclick = openModal;
+  document.getElementById('cta-idea').onclick = openModal;
+  document.getElementById('cta-tips').onclick = openModal;
+  document.getElementById('cta-maintenance').onclick = openModal;
+  document.querySelector('.nav-cta').onclick = openModal;
 </script>
 </body>
 </html>
