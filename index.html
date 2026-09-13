@@ -76,12 +76,7 @@
     },
     "knowsAbout": ["MVP 개발", "스타트업", "앱 개발", "웹 개발", "TIPS 프로그램", "아이디어 검증", "AI 컨설팅"],
     "areaServed": "KR",
-    "priceRange": "$$",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "120"
-    }
+    "priceRange": "$$"
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -539,7 +534,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <ul class="nav-links">
     <li><a href="#services">서비스</a></li>
     <li><a href="#process">진행 방식</a></li>
-    <li><a href="#proof">고객 후기</a></li>
     <li><a href="#tips">TIPS 프로그램</a></li>
   </ul>
   <button class="nav-cta" onclick="scrollToSection('cta')">무료 상담하기</button>
@@ -571,26 +565,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="btn-secondary" id="hero-cta2">내 아이디어 검증받기 →</button>
   </div>
 </section>
-
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat reveal">
-    <div class="stat-num" data-target="120">0</div>
-    <div class="stat-label">누적 프로젝트</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num" data-target="98">0</div>
-    <div class="stat-label">고객 만족도 %</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num" data-target="14">0</div>
-    <div class="stat-label">평균 출시 일수</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num" data-target="30">0</div>
-    <div class="stat-label">TIPS 지원 프로젝트</div>
-  </div>
-</div>
 
 <!-- SERVICES -->
 <section id="services">
@@ -666,50 +640,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="step-num">04</div>
         <h3>출시 & 성장</h3>
         <p>마켓 출시 후 데이터 기반으로 지속적으로 개선합니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOCIAL PROOF -->
-<section id="proof">
-  <div class="section-inner">
-    <div class="section-tag reveal">Social Proof</div>
-    <h2 class="section-title reveal">창업 준비자와 함께한<br />실제 이야기</h2>
-
-    <div class="proof-grid">
-      <div class="proof-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="proof-quote">"직장 다니면서 창업 준비해야 해서 시간이 없었는데, sidejob 덕분에 3주 만에 MVP를 출시했어요. 지금은 월 300만원 매출을 달성했습니다."</p>
-        <div class="proof-author">
-          <div class="proof-avatar">김</div>
-          <div>
-            <div class="proof-name">김*현</div>
-            <div class="proof-role">헬스케어 앱 창업자 · 전 직장인</div>
-          </div>
-        </div>
-      </div>
-      <div class="proof-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="proof-quote">"아이디어는 있었지만 개발을 모르니 막막했어요. sidejob이 기획부터 출시까지 같이 고민해줘서 TIPS 선정까지 받을 수 있었습니다."</p>
-        <div class="proof-author">
-          <div class="proof-avatar">이</div>
-          <div>
-            <div class="proof-name">이*진</div>
-            <div class="proof-role">에듀테크 스타트업 대표 · TIPS 선정</div>
-          </div>
-        </div>
-      </div>
-      <div class="proof-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="proof-quote">"퇴근 후 창업을 결심했는데 개발사 찾는 것 자체가 너무 어려웠어요. sidejob은 비개발자도 이해하기 쉽게 설명해주고 진짜 파트너처럼 일해줍니다."</p>
-        <div class="proof-author">
-          <div class="proof-avatar">박</div>
-          <div>
-            <div class="proof-name">박*수</div>
-            <div class="proof-role">로컬커머스 플랫폼 · 사이드 프로젝트</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -894,26 +824,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
-
-  // Counter animation
-  const counters = document.querySelectorAll('[data-target]');
-  const countObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = +el.dataset.target;
-        let count = 0;
-        const step = target / 60;
-        const timer = setInterval(() => {
-          count = Math.min(count + step, target);
-          el.textContent = Math.floor(count) + (el.nextElementSibling?.textContent.includes('%') ? '' : '+');
-          if (count >= target) clearInterval(timer);
-        }, 20);
-        countObs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-  counters.forEach(el => countObs.observe(el));
 
   // Navbar scroll effect
   window.addEventListener('scroll', () => {
